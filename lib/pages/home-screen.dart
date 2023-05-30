@@ -19,7 +19,10 @@ class MainScreen extends StatelessWidget {
                   style: TextStyle(fontSize: 24, color: Colors.red)),
               ElevatedButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, '/todo');
+                    Navigator.pushNamed(
+                      context,
+                      '/todo',
+                    );
                   },
                   child: const Text("Перейти на экран контактов"))
             ],

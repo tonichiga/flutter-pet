@@ -1,4 +1,8 @@
+import "dart:convert";
+
 import "package:flutter/material.dart";
+import "package:flutter/services.dart";
+import "package:my_app/entity/users/user.dart";
 
 class TodoScreen extends StatefulWidget {
   const TodoScreen({Key? key}) : super(key: key);
@@ -7,15 +11,34 @@ class TodoScreen extends StatefulWidget {
   State<TodoScreen> createState() => _TodoScreen();
 }
 
+class UserData {
+  final List<User> users;
+
+  UserData(this.users);
+}
+
 class _TodoScreen extends State<TodoScreen> {
   final String _userTodo = "";
-  final List<String> todoList = [];
+  List<User> userList = [];
 
   @override
   void initState() {
     super.initState();
 
-    todoList.addAll(["1", "2", "3"]);
+    readJson();
+  }
+
+  Future<void> readJson() async {
+    try {
+      final String response = await rootBundle.loadString('lib/data/user.json');
+      final data = await json.decode(response) as UserData;
+      final List<User> users = data.users;
+      userList = [...users];
+
+      print("data : $data");
+    } catch (e) {
+      print(e);
+    }
   }
 
   @override
@@ -26,11 +49,46 @@ class _TodoScreen extends State<TodoScreen> {
           centerTitle: true,
         ),
         body: ListView.builder(
-            itemCount: todoList.length,
+            padding: const EdgeInsets.only(top: 20),
+            itemCount: userList.length,
             itemBuilder: (BuildContext context, int index) {
               return Dismissible(
-                  key: Key(todoList[index]),
-                  child: Card(child: ListTile(title: Text(todoList[index]))));
+                  key: Key(userList[index].name),
+                  onDismissed: (direction) {
+                    // ignore: avoid_print
+                    print("Clicked $index");
+                    setState(() {
+                      userList.removeAt(index);
+                    });
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('$index dismissed')));
+                  },
+                  child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.only(left: 0, right: 0),
+                        backgroundColor: Colors.transparent, // Background color
+                      ),
+                      onPressed: () {
+                        print("Clicked $index");
+                        setState(() {
+                          userList.removeAt(index);
+                        });
+                        Navigator.pushNamed(context, '/details', arguments: {
+                          "index": () {},
+                        });
+                      },
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          Card(
+                            shadowColor: Colors.black,
+                            child: ListTile(
+                                title: Text(
+                              userList[index].name,
+                            )),
+                          ),
+                        ],
+                      )));
             }));
   }
 }
