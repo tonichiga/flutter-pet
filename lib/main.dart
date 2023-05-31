@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/pages/contacts.dart';
 import 'package:my_app/pages/details.dart';
-import 'package:my_app/pages/home-screen.dart';
+import 'package:my_app/pages/home_screen.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -9,7 +9,7 @@ void main() {
     routes: {
       '/': (context) => const MainScreen(),
       "/todo": (context) => const TodoScreen(),
-      "/details": (context) => const Details(),
+      "/details": (context) => Details(),
     },
   ));
 }

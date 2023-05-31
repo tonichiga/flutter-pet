@@ -19,25 +19,32 @@ class UserData {
 
 class _TodoScreen extends State<TodoScreen> {
   final String _userTodo = "";
-  List<User> userList = [];
+  List<dynamic> userList = [];
 
   @override
   void initState() {
     super.initState();
+  }
 
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
     readJson();
   }
 
   Future<void> readJson() async {
     try {
       final String response = await rootBundle.loadString('lib/data/user.json');
-      final data = await json.decode(response) as UserData;
-      final List<User> users = data.users;
-      userList = [...users];
+      final data = await json.decode(response);
 
+      userList =
+          data["users"].map<User>((user) => User.fromJson(user)).toList();
+      setState(() {
+        userList;
+      });
       print("data : $data");
     } catch (e) {
-      print(e);
+      print("Error : $e");
     }
   }
 
@@ -69,12 +76,9 @@ class _TodoScreen extends State<TodoScreen> {
                         backgroundColor: Colors.transparent, // Background color
                       ),
                       onPressed: () {
-                        print("Clicked $index");
-                        setState(() {
-                          userList.removeAt(index);
-                        });
+                        var user = userList[index];
                         Navigator.pushNamed(context, '/details', arguments: {
-                          "index": () {},
+                          "user": user,
                         });
                       },
                       child: Column(
@@ -91,4 +95,6 @@ class _TodoScreen extends State<TodoScreen> {
                       )));
             }));
   }
+
+// value type has name, email
 }
