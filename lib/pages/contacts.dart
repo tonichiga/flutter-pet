@@ -18,7 +18,6 @@ class UserData {
 }
 
 class _TodoScreen extends State<TodoScreen> {
-  final String _userTodo = "";
   List<dynamic> userList = [];
 
   @override
@@ -37,12 +36,11 @@ class _TodoScreen extends State<TodoScreen> {
       final String response = await rootBundle.loadString('lib/data/user.json');
       final data = await json.decode(response);
 
-      userList =
+      List<User> users =
           data["users"].map<User>((user) => User.fromJson(user)).toList();
       setState(() {
-        userList;
+        userList = users;
       });
-      print("data : $data");
     } catch (e) {
       print("Error : $e");
     }
@@ -79,6 +77,7 @@ class _TodoScreen extends State<TodoScreen> {
                         var user = userList[index];
                         Navigator.pushNamed(context, '/details', arguments: {
                           "user": user,
+                          "callback": handleUpdateContacts,
                         });
                       },
                       child: Column(
@@ -94,6 +93,19 @@ class _TodoScreen extends State<TodoScreen> {
                         ],
                       )));
             }));
+  }
+
+  handleUpdateContacts(id, user) {
+    final user = userList.firstWhere((element) => element.id == id);
+    var newList = userList
+        .map((element) => element.id == user.id ? user : element)
+        .toList();
+    print("User : $user");
+    print("newList : $newList");
+
+    setState(() {
+      userList = newList;
+    });
   }
 
 // value type has name, email

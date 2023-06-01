@@ -1,9 +1,10 @@
 import "package:flutter/material.dart";
 import "package:my_app/entity/users/user.dart";
 
+typedef UpdateContactsCallback = Function(String?, User);
+
 class Details extends StatefulWidget {
   const Details({Key? key}) : super(key: key);
-
   @override
   State<Details> createState() => _Details();
 }
@@ -11,8 +12,9 @@ class Details extends StatefulWidget {
 class _Details extends State<Details> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   User? user;
-  final name = "";
-  final email = "";
+  String name = "";
+  String email = "";
+  late UpdateContactsCallback? callback;
 
   @override
   void initState() {
@@ -26,6 +28,7 @@ class _Details extends State<Details> {
     var modalData = (ModalRoute.of(context)?.settings.arguments ??
         <String, dynamic>{}) as Map;
     var userData = modalData['user'] as User;
+    callback = modalData['callback'] as UpdateContactsCallback?;
     setState(() {
       user = userData;
     });
@@ -77,6 +80,9 @@ class _Details extends State<Details> {
                                   }
                                   return null;
                                 },
+                                onSaved: (value) {
+                                  name = value!;
+                                },
                               ),
                               TextFormField(
                                 decoration: const InputDecoration(
@@ -87,6 +93,9 @@ class _Details extends State<Details> {
                                     return 'Please enter some text';
                                   }
                                   return null;
+                                },
+                                onSaved: (value) {
+                                  email = value!;
                                 },
                               ),
                               Padding(
@@ -115,10 +124,20 @@ class _Details extends State<Details> {
   }
 
   void handleEdit() {
-    print();
+    if (_formKey.currentState!.validate()) {
+      // Форма прошла валидацию, можно обрабатывать данные
+      _formKey.currentState!.save();
+      print('Имя: $name');
+      print('Email: $email');
+
+      setState(() {
+        user?.name = name;
+        user?.email = email;
+      });
+
+      callback!(user?.id, user!);
+    }
   }
 
-  handleChangeForm(e) {
-    print(e);
-  }
+  handleChangeForm(e) {}
 }

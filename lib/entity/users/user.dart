@@ -1,13 +1,13 @@
 class User {
-  // String id = "";
   String? name;
   String? email;
   String? password;
+  String? id;
 
-  User(this.name, this.email, this.password);
+  User(this.name, this.email, this.password, this.id);
 
   factory User.fromJson(Map<String, dynamic> json) {
-    return User(json['name'], json['email'], json['password']);
+    return User(json['name'], json['email'], json['password'], json["id"]);
   }
 
   @override
