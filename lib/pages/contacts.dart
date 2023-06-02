@@ -48,12 +48,9 @@ class _TodoScreen extends State<TodoScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: const Text("Список дел"),
-          centerTitle: true,
-        ),
-        body: ListView.builder(
+    return Expanded(
+      child: Center(
+        child: ListView.builder(
             padding: const EdgeInsets.only(top: 20),
             itemCount: userList.length,
             itemBuilder: (BuildContext context, int index) {
@@ -75,10 +72,10 @@ class _TodoScreen extends State<TodoScreen> {
                       ),
                       onPressed: () {
                         var user = userList[index];
-                        Navigator.pushNamed(context, '/details', arguments: {
-                          "user": user,
-                          "callback": handleUpdateContacts,
-                        });
+                        // Navigator.pushNamed(context, '/details', arguments: {
+                        //   "user": user,
+                        //   "callback": handleUpdateContacts,
+                        // });
                       },
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -92,7 +89,9 @@ class _TodoScreen extends State<TodoScreen> {
                           ),
                         ],
                       )));
-            }));
+            }),
+      ),
+    );
   }
 
   handleUpdateContacts(id, user) {
