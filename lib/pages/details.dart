@@ -136,7 +136,7 @@ class _Details extends State<Details> {
         user?.email = email;
       });
 
-      callback!(user?.id, user!);
+      // callback!(user?.id, user!);
     }
   }
 
