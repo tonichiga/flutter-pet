@@ -1,14 +1,16 @@
-part of "user_bloc.dart";
+// part of "user_bloc.dart";
 
-abstract class UsersState {}
+abstract class UserState {}
 
-class UsersInitialState extends UsersState {}
+class UserInitialState extends UserState {}
 
-class UsersLoadedState extends UsersState {
+class UserLoadedState extends UserState {
   final List<User> users;
 
-  UsersLoadedState(this.users);
+  UserLoadedState(this.users);
 }
+
+class UserLoadingState extends UserState {}
 
 class User {
   final String name;
