@@ -63,7 +63,7 @@ class _BottomNavigationBarExampleState
 
   Future<void> fetchUser() async {
     final users = await _providerApi.fetchUsers();
-    print("User list $users");
+    // print("User list $users");
   }
 
   @override
@@ -84,7 +84,7 @@ class _BottomNavigationBarExampleState
         chartData = dataList;
       });
 
-      print("Chart data $chartData");
+      // print("Chart data $chartData");
     } catch (e) {
       print("Home readJson error: $e");
     }
