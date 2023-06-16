@@ -47,6 +47,8 @@ class _Home extends State<Home> {
       // final users = context.watch<UserBloc>().state;
       // final isLoading = context.select((UserBloc bloc) => bloc.state.isLoading);
       final counter = context.select((CounterBloc bloc) => bloc.state);
+      final counterBloc = BlocProvider.of<CounterBloc>(context);
+      final userBloc = BlocProvider.of<UserBloc>(context);
 
       return Column(
         children: [
@@ -81,20 +83,17 @@ class _Home extends State<Home> {
                     children: [
                       ElevatedButton(
                         onPressed: () {
-                          final counterBloc = context.read<CounterBloc>();
                           counterBloc.add(CounterIncEvent());
                         },
                         child: const Text('+'),
                       ),
                       ElevatedButton(
                           onPressed: () {
-                            final counterBloc = context.read<CounterBloc>();
                             counterBloc.add(CounterDecEvent());
                           },
                           child: const Text('-')),
                       ElevatedButton(
                           onPressed: () {
-                            final userBloc = context.read<UserBloc>();
                             userBloc.add(UserGetUsersEvent(counter));
                             // userBloc
                             //     .add(UserGetUsersEvent(counterBloc.state));
@@ -102,8 +101,6 @@ class _Home extends State<Home> {
                           child: const Text('Add user')),
                       ElevatedButton(
                           onPressed: () {
-                            final userBloc = context.read<UserBloc>();
-
                             userBloc.add(UserGetUsersJobEvent(counter));
                             // userBloc.add(
                             //     UserGetUsersJobEvent(counterBloc.state));

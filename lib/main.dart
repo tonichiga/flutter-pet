@@ -118,7 +118,7 @@ class _BottomNavigationBarExampleState
           create: (context) => bloc,
         ),
         BlocProvider<UserBloc>(
-          create: (context) => UserBloc(),
+          create: (context) => UserBloc(bloc),
         ),
       ],
       child: Scaffold(
