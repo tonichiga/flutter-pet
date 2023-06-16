@@ -44,8 +44,10 @@ class _Home extends State<Home> {
     // counterBloc.add(CounterIncEvent());
 
     return Builder(builder: (context) {
-      final users = context.watch<UserBloc>().state;
-      final counter = context.watch<CounterBloc>().state;
+      // final users = context.watch<UserBloc>().state;
+      // final isLoading = context.select((UserBloc bloc) => bloc.state.isLoading);
+      final counter = context.select((CounterBloc bloc) => bloc.state);
+
       return Column(
         children: [
           Container(
@@ -111,37 +113,76 @@ class _Home extends State<Home> {
                   ),
                 ],
               )),
-          Container(
-              margin: const EdgeInsets.only(top: 32),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                      height: 300,
-                      width: double.infinity,
-                      // color: ThemeColors.purple,
-                      decoration: BoxDecoration(
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(24)),
-                        color: ThemeColors.darkPurple,
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          if (users.users.isEmpty &&
-                              users.job.isEmpty &&
-                              users.isLoading)
-                            const CircularProgressIndicator(),
-                          if (users.users.isNotEmpty)
-                            ...users.users
-                                .map((user) => Text(user.name))
-                                .toList(),
-                          if (users.job.isNotEmpty)
-                            ...users.job.map((job) => Text(job.name)).toList(),
-                        ],
-                      ))
-                ],
-              )),
+          BlocBuilder<CounterBloc, int>(
+            builder: (context, state) {
+              final users = context.select((UserBloc bloc) => bloc.state.users);
+
+              return Container(
+                  margin: const EdgeInsets.only(top: 32),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                          height: 300,
+                          width: double.infinity,
+                          // color: ThemeColors.purple,
+                          decoration: BoxDecoration(
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(24)),
+                            color: ThemeColors.darkPurple,
+                          ),
+                          child: Column(
+                            // mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              // if (isLoading) const CircularProgressIndicator(),
+                              if (users.isNotEmpty)
+                                ...users
+                                    .map((user) => Text(
+                                          user.name,
+                                          style: TextStyle(color: Colors.white),
+                                        ))
+                                    .toList(),
+                            ],
+                          ))
+                    ],
+                  ));
+            },
+          ),
+          BlocBuilder<UserBloc, UserState>(
+            builder: (context, state) {
+              final jobs = context.select((UserBloc bloc) => bloc.state.job);
+
+              return Container(
+                  margin: const EdgeInsets.only(top: 32),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                          height: 300,
+                          width: double.infinity,
+                          // color: ThemeColors.purple,
+                          decoration: BoxDecoration(
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(24)),
+                            color: ThemeColors.darkPurple,
+                          ),
+                          child: Column(
+                            // mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              // if (isLoading) const CircularProgressIndicator(),
+                              if (jobs.isNotEmpty)
+                                ...jobs
+                                    .map((job) => Text(
+                                          job.name,
+                                          style: TextStyle(color: Colors.white),
+                                        ))
+                                    .toList(),
+                            ],
+                          ))
+                    ],
+                  ));
+            },
+          ),
           Container(
               margin: const EdgeInsets.only(top: 32),
               child: Column(
