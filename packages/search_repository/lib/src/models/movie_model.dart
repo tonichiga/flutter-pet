@@ -13,7 +13,10 @@ class MovieModel {
       duration: json['duration'],
       rating: json['rating'],
       url: json['url'],
-      images: json['images']['jpg'] as ImageModel,
+      images: ImageModel(
+          imageUrl: json['images']?['jpg']?["image_url"],
+          smallImageUrl: json['images']?['jpg']?["small_image_url"],
+          largeImageUrl: json['images']?['jpg']?["large_image_url"]),
     );
   }
 }
