@@ -1,5 +1,5 @@
 import "package:flutter/material.dart";
-import "package:my_app/entity/users/user.dart";
+import 'package:my_app/entity/user_entity.dart';
 
 typedef UpdateContactsCallback = Function(String?, User);
 

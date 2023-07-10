@@ -6,7 +6,7 @@ import 'package:my_app/bloc/counter_bloc/counter_block.dart';
 import 'package:my_app/bloc/user_bloc/user_bloc.dart';
 import 'package:my_app/bloc/user_bloc/user_bloc.dart';
 import 'package:my_app/bloc/user_bloc/user_state.dart';
-import 'package:my_app/entity/users/user.dart';
+import 'package:my_app/entity/user_entity.dart';
 import 'package:my_app/pagesDepr/contacts.dart';
 import 'package:my_app/pagesDepr/details.dart';
 import 'package:my_app/pagesDepr/home.dart';
@@ -213,21 +213,21 @@ class _MainExample extends State<MainExample> {
   }
 }
 
-class FloatBtn extends StatelessWidget {
-  const FloatBtn({
-    super.key,
-  });
+// class FloatBtn extends StatelessWidget {
+//   const FloatBtn({
+//     super.key,
+//   });
 
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<CounterBloc, int>(
-      builder: (context, state) => BlocListener<CounterBloc, int>(
-        listener: (context, state) {
-          Scaffold.of(context).showBottomSheet(
-              (context) => Container(child: Text("Hello world")));
-        },
-        child: Center(child: Text("Hello world")),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return BlocBuilder<CounterBloc, int>(
+//       builder: (context, state) => BlocListener<CounterBloc, int>(
+//         listener: (context, state) {
+//           Scaffold.of(context).showBottomSheet(
+//               (context) => Container(child: Text("Hello world")));
+//         },
+//         child: Center(child: Text("Hello world")),
+//       ),
+//     );
+//   }
+// }

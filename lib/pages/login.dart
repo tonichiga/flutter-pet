@@ -43,11 +43,17 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 const SizedBox(height: 32),
                 const TextField(
+                  style: TextStyle(
+                    color: Colors.black, // Задайте желаемый цвет текста
+                  ),
                   decoration: InputDecoration(
                     filled: true,
                     fillColor: Color(0xFFF6F6F6),
                     hintText: "Email",
                     hintStyle: TextStyle(color: Colors.grey),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide.none, // Установите пустую границу
+                    ),
                     enabledBorder: OutlineInputBorder(
                       borderSide:
                           BorderSide(color: Color(0xFFE8E8E8), width: 1.0),
@@ -64,11 +70,17 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 const SizedBox(height: 16),
                 const TextField(
+                  style: TextStyle(
+                    color: Colors.black, // Задайте желаемый цвет текста
+                  ),
                   decoration: InputDecoration(
                     filled: true,
                     fillColor: Color(0xFFF6F6F6),
                     hintText: "Password",
                     hintStyle: TextStyle(color: Colors.grey),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide.none, // Установите пустую границу
+                    ),
                     enabledBorder: OutlineInputBorder(
                       borderSide:
                           BorderSide(color: Color(0xFFE8E8E8), width: 1.0),

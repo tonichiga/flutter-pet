@@ -2,7 +2,7 @@ import "dart:convert";
 
 import "package:flutter/material.dart";
 import "package:flutter/services.dart";
-import "package:my_app/entity/users/user.dart";
+import 'package:my_app/entity/user_entity.dart';
 
 class TodoScreen extends StatefulWidget {
   const TodoScreen({Key? key}) : super(key: key);

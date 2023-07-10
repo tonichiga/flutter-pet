@@ -1,0 +1,17 @@
+[
+  {
+    "id": "1",
+    "message": "London is the capital of Greate Britian",
+    "author": { "name": "John", "surname": "Smith" }
+  },
+  {
+    "id": "2",
+    "message": "Kyiv is the capital of Ukraine",
+    "author": { "name": "Ivan", "surname": "Ivanov" }
+  },
+  {
+    "id": "3",
+    "message": "Paris is the capital of France",
+    "author": { "name": "Petr", "surname": "Petrov" }
+  }
+]

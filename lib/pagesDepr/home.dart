@@ -10,7 +10,7 @@ import 'package:my_app/bloc/user_bloc/user_events.dart';
 import 'package:my_app/bloc/user_bloc/user_state.dart';
 import 'package:my_app/components/charts/candles.dart';
 import 'package:my_app/utils/colors.dart';
-import "package:my_app/entity/charts/chart_bar.dart";
+import 'package:my_app/entity/chart_entity.dart';
 
 class Home extends StatefulWidget {
   final chartData;

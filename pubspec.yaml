@@ -75,6 +75,7 @@ flutter:
   assets:
     - lib/data/user.json
     - lib/data/chart.json
+    - lib/data/post.json
     - assets/images/avatar.png
     - assets/images/svg/alert.svg
     - assets/images/bg.jpeg
